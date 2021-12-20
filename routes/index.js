@@ -6,8 +6,7 @@ const router = express.Router()
 const home = require('./modules/home')
 const records = require("./modules/records")
 // use
-router.use('/', home)
 router.use("/records", records)
-
+router.use('/', home)
 // export
 module.exports = router

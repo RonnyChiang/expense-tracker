@@ -1,7 +1,7 @@
 const mongoose = require('mongoose') // 載入 mongoose
 
 // for heroku
-const MONGODB_URI = process.env.MONGODB_URI
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/expense-tracker"
 
 mongoose.connect(MONGODB_URI) // 設定連線到 mongoDB
 
