@@ -31,6 +31,18 @@ router.post('/', (req, res) => {
   // })
 })
 
+router.delete("/:recordId", (req, res) => {
+  const _id = req.params.recordId
+  return Record.findById(_id)
+    .then(record => record.remove())
+    .then(() => res.redirect("/"))
+  // .catch(err => {
+  //   res.render(
+  //     'errorPage',
+  //     { status: 500, error: err.message }
+  //   )
+  // })
+})
 
 //export
 module.exports = router
