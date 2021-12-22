@@ -1,24 +1,62 @@
 <!-- search bar -->
 
+{{!-- record list --}}
+{{#if recordData}}
+<div class="container">
+  <div class="row">
+    <ul class="list-group">
+      {{#each recordData}}
+      <div class="record-item">
+        <li class="list-group-item my-1" style="box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.2); border-radius: 10px;">
+          <div class="row mx-auto">
+            <div>
 
-<ul class="list-group">
-  <li class="list-group-item">A simple default list group item</li>
-</ul>
-<ul class="list-group">
-  <li class="list-group-item">A simple default list group item</li>
-</ul>
-<ul class="list-group">
-  <li class="list-group-item">A simple default list group item</li>
-</ul>
-<ul class="list-group">
-  <li class="list-group-item">A simple default list group item</li>
-</ul>
-<ul class="list-group">
-  <li class="list-group-item">A simple default list group item</li>
-</ul>
-<ul class="list-group">
-  <li class="list-group-item">A simple default list group item</li>
-</ul>
-<ul class="list-group">
-  <li class="list-group-item">A simple default list group item</li>
-</ul>
+            </div>
+          </div>
+          {{this.name}}
+        </li>
+        <p>{{this.date}}</p>
+        </li>
+        <li class="list-group-item my-1" style="box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.2); border-radius: 10px;">
+          <div class="row mx-auto">
+            <div class="col-9 row align-items-center">
+              <div class="col-2 col-lg-1 text-center" style="font-size: 30px; color:#66d4d4">
+                <i class="{{this.icon}}"></i>
+              </div>
+              <div class="col-6 col-lg-8 d-flex flex-column">
+                <div>
+                  <h4>{{this.name}}</h4>
+                </div>
+                <div>{{this.date}}</div>
+              </div>
+              <div class="col-auto align-items-center">
+                ${{this.amount}}
+              </div>
+            </div>
+            <div class="col-3 text-right align-self-center">
+              <a href="/records/{{this._id}}/edit">
+                <button class="btn btn-success mr-2 my-1">修改</button>
+              </a>
+              <button class="btn btn-danger mr-2 delete-btn" data-toggle="modal" data-target="#expense-modal"
+                data-id="{{this._id}}" data-name="{{this.name}}">刪除</button>
+            </div>
+          </div>
+        </li>
+      </div>
+      <li class="list-group-item">A simple default list group item</li>
+
+      <li class="list-group-item list-group-item-primary">A simple primary list group item</li>
+      <li class="list-group-item list-group-item-secondary">A simple secondary list group item</li>
+      <li class="list-group-item list-group-item-success">A simple success list group item</li>
+      <li class="list-group-item list-group-item-danger">A simple danger list group item</li>
+      <li class="list-group-item list-group-item-warning">A simple warning list group item</li>
+      <li class="list-group-item list-group-item-info">A simple info list group item</li>
+      <li class="list-group-item list-group-item-light">A simple light list group item</li>
+      <li class="list-group-item list-group-item-dark">A simple dark list group item</li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
+{{else}}
+
+{{/if}}
