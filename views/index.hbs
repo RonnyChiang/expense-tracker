@@ -21,7 +21,9 @@
               <h3>{{ this.amount }}</h3>
             </div>
             <div class="col-3 d-flex">
-              <button type="button" class="btn btn-info me-2">修改</button>
+              <a href="/records/{{this._id}}/edit">
+                <button type="button" class="btn btn-info me-2">修改</button>
+              </a>
               <form action="/records/{{this._id}}?_method=DELETE" method="POST">
                 <button class="btn btn-danger">刪除</button>
               </form>
