@@ -1,9 +1,38 @@
 <!-- search bar -->
+<div class="container search-bar">
+  <div class="search-bar-inner">
+    <h4 class="search-bar-title">尋找帳目</h4>
+    <form action="/" class="d-flex">
+      <div class="input-group">
+        <select name="sortCategory" id="sortCategory" class="form-control">
+          <option selected>{{#if sortCategory}} {{sortCategory}} {{else}}請選擇類別 {{/if}}</option>
+          <option value="家居物業">家居物業</option>
+          <option value="交通出行">交通出行</option>
+          <option value="休閒娛樂">休閒娛樂</option>
+          <option value="餐飲食品">餐飲食品</option>
+          <option value="其他">其他</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <input type="text" class="form-control" name="sortKeywords" placeholder="請輸入關鍵字">
+        <div class="input-group-append">
+          <button class="btn btn-major" type="submit" id="search-button">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+
+{{!-- total amount & add new button --}}
 
 {{!-- record list --}}
 
 {{#if recordData}}
-<div class="container">
+<div class="container mt-5">
   <div class="row">
     <ul class="list-group">
       {{#each recordData}}

@@ -1,0 +1,66 @@
+<h1 class='mb-2 new-record-title'>讓我們來修改它！</h1>
+
+<div class="container">
+  <form action="/records/{{record._id}}?_method=PUT" method="POST">
+
+    <div class="form-group row justify-content-center">
+      <label for="category" class="col-sm-2 col-form-label">類別<span class="text-danger">*</span></label>
+      <div class="col-sm-4">
+        <select class="form-select" aria-label="Default select example" id="category" placeholder="請選擇類別"
+          name="category" required>
+          <option selected>{{record.categoryId.name}}</option>
+          <option value="家居物業">家居物業</option>
+          <option value="交通出行">交通出行</option>
+          <option value="休閒娛樂">休閒娛樂</option>
+          <option value="餐飲食品">餐飲食品</option>
+          <option value="其他">其他</option>
+
+        </select>
+      </div>
+    </div>
+
+
+    <div class="form-group row justify-content-center">
+      <label for="amount" class="col-sm-2 col-form-label">金額<span class="text-danger">*</span></label>
+      <div class="col-sm-4">
+        <input type="number" class="form-control" id="amount" placeholder="999" min="0" name="amount"
+          value="{{record.amount}}" required>
+      </div>
+    </div>
+
+    <div class="form-group row justify-content-center">
+      <label for="name" class="col-sm-2 col-form-label">名稱<span class="text-danger">*</span></label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="name" placeholder="晚餐－sukiya.." name="name"
+          value="{{ record.name }}" required>
+      </div>
+    </div>
+
+    <div class="form-group row justify-content-center">
+      <label for="date" class="col-sm-2 col-form-label">日期<span class="text-danger">*</span></label>
+      <div class="col-sm-4">
+        <input type="date" name="date" class="form-control" value="{{record.date}}" required>
+      </div>
+    </div>
+
+    <div class="form-group row justify-content-center">
+      <label for="description" class="col-sm-2 col-form-label">簡介</label>
+      <div class="col-sm-4">
+        <textarea id="description" class="form-control" rows="3" name="description"
+          value="{{record.description}}"></textarea>
+      </div>
+    </div>
+
+    <div class="text-center mt-2">
+      <button type="submit" class="btn btn-primary mr-2">
+        確定新增
+      </button>
+      <a href="/">
+        <button type="button" class="btn btn-outline-secondary mr-2">
+          讓我再想想
+        </button>
+      </a>
+      <button type="reset" class="btn btn-outline-danger mr-2">重新輸入</button>
+    </div>
+  </form>
+</div>

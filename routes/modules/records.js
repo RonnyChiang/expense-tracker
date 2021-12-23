@@ -63,7 +63,7 @@ router.put("/:recordId", (req, res) => {
         .findOne({ name: category })
         .then(category => category._id)
         .then(categoryId => {
-          record.category = categoryId
+          record.categoryId = categoryId
           record.amount = amount
           record.name = name
           record.date = date
