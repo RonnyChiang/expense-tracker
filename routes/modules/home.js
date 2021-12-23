@@ -8,7 +8,36 @@ const Category = require('../../models/category')
 // route
 router.get('/', (req, res) => {
   const { sortCategory, sortKeywords } = req.query
-  if (sortCategory) {
+  const keywords = sortKeywords
+  const keyword = keywords
+  console.log(sortCategory)
+  console.log(typeof (keyword))
+  if (sortCategory === "" || !sortCategory) {
+    Record.find({})
+      .lean()
+      .populate("categoryId")
+      .sort({ _id: "asc" })
+      .then(recordData => {
+        if (keyword) {
+          const recordsNameFilter = recordData.filter(data => data.name.toLowerCase().includes(keyword))
+          recordsNameFilter.forEach(data => {
+            data.date = moment(data.date).format("YYYY/MM/DD")
+          })
+          res.render("index", { recordData: recordsNameFilter, sortCategory })
+        } else {
+          recordData.forEach(data => {
+            data.date = moment(data.date).format("YYYY/MM/DD")
+          })
+          res.render("index", { recordData: recordData, sortCategory })
+        }
+
+
+        // .catch(err => {
+        //   console.log(err)
+        //   res.render('error', { status: 500, error: err.message })
+        // })
+      })
+  } else {
     return Category
       .findOne({ name: sortCategory })
       .then(category => category._id)
@@ -18,10 +47,14 @@ router.get('/', (req, res) => {
           .populate("categoryId")
           .sort({ _id: "asc" })
           .then(recordData => {
-            recordData.forEach(data => {
+            const recordsNameFilter = recordData.filter(data => data.name.toLowerCase().includes(keyword))
+            recordsNameFilter.forEach(data => {
               data.date = moment(data.date).format("YYYY/MM/DD")
             })
-            res.render("index", { recordData, sortCategory })
+            res.render("index", { recordData: recordsNameFilter, sortCategory, sortKeywords })
+
+
+
             // .catch(err => {
             //   console.log(err)
             //   res.render('error', { status: 500, error: err.message })
@@ -29,15 +62,9 @@ router.get('/', (req, res) => {
           })
       })
   }
-  Record.find({})
-    .lean()
-    .populate("categoryId")
-    .sort({ _id: "asc" })
-    .then(recordData => {
-      recordData.forEach(data => {
-        data.date = moment(data.date).format("YYYY/MM/DD")
-      })
-      res.render("index", { recordData })
-    })
+
+
+
+
 })
 module.exports = router

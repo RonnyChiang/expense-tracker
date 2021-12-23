@@ -5,7 +5,7 @@
     <form action="/" class="d-flex">
       <div class="input-group">
         <select name="sortCategory" id="sortCategory" class="form-control">
-          <option selected>{{#if sortCategory}} {{sortCategory}} {{else}}請選擇類別 {{/if}}</option>
+          <option selected value="">{{#if sortCategory}} {{sortCategory}} {{else}}請選擇類別 {{/if}}</option>
           <option value="家居物業">家居物業</option>
           <option value="交通出行">交通出行</option>
           <option value="休閒娛樂">休閒娛樂</option>
@@ -14,7 +14,8 @@
         </select>
       </div>
       <div class="input-group">
-        <input type="text" class="form-control" name="sortKeywords" placeholder="請輸入關鍵字">
+        <input type="text" class="form-control" name="sortKeywords" placeholder="請輸入關鍵字"
+          value="{{#if sortKeywords}} {{sortKeywords}}{{/if}}">
         <div class="input-group-append">
           <button class="btn btn-major" type="submit" id="search-button">
             <i class="fas fa-search"></i>
