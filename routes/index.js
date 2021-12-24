@@ -6,9 +6,10 @@ const router = express.Router()
 const home = require('./modules/home')
 const records = require("./modules/records")
 const users = require("./modules/users")
+const { authenticator } = require('../middleware/auth')  // 掛載 middleware
 // use
-router.use("/records", records)
+router.use("/records", authenticator, records)
 router.use("/users", users)
-router.use('/', home)
+router.use('/', authenticator, home)
 // export
 module.exports = router
