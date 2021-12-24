@@ -15,13 +15,15 @@ const recordSchema = new Schema({
     required: true // 這是個必填欄位
   },
   description: {
-    type: String, // 資料型別是字串
+    type: String, // 資料型別是字串s
     required: false // 這是個必填欄位
   },
-  // userId: {
-  //   type: String, // 資料型別是字串
-  //   required: true // 這是個必填欄位
-  // },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "user",
+    index: true,
+    required: true // 這是個必填欄位
+  },
   categoryId: {
     type: Schema.Types.ObjectId, // 資料型別是字串
     ref: "Category",

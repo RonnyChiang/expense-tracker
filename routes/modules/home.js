@@ -7,12 +7,13 @@ const Record = require("../../models/record")
 const Category = require('../../models/category')
 // route
 router.get('/', (req, res) => {
+  const userId = req.user._id
   const { sortCategory, sortKeywords } = req.query
   const keywords = sortKeywords
   const keyword = keywords
   let totalAmount = 0
   if (sortCategory === "" || !sortCategory) {
-    Record.find({})
+    Record.find({ userId })
       .lean()
       .populate("categoryId")
       .sort({ _id: "asc" })
@@ -43,7 +44,7 @@ router.get('/', (req, res) => {
       .findOne({ name: sortCategory })
       .then(category => category._id)
       .then(sortCategoryId => {
-        Record.find({ categoryId: sortCategoryId })
+        Record.find({ categoryId: sortCategoryId, userId })
           .lean()
           .populate("categoryId")
           .sort({ _id: "asc" })
