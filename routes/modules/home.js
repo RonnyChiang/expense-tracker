@@ -10,8 +10,7 @@ router.get('/', (req, res) => {
   const { sortCategory, sortKeywords } = req.query
   const keywords = sortKeywords
   const keyword = keywords
-  console.log(sortCategory)
-  console.log(typeof (keyword))
+  let totalAmount = 0
   if (sortCategory === "" || !sortCategory) {
     Record.find({})
       .lean()
@@ -22,13 +21,17 @@ router.get('/', (req, res) => {
           const recordsNameFilter = recordData.filter(data => data.name.toLowerCase().includes(keyword))
           recordsNameFilter.forEach(data => {
             data.date = moment(data.date).format("YYYY/MM/DD")
+            totalAmount += data.amount
+            console.log(totalAmount)
           })
-          res.render("index", { recordData: recordsNameFilter, sortCategory })
+          res.render("index", { recordData: recordsNameFilter, sortCategory, totalAmount })
         } else {
           recordData.forEach(data => {
             data.date = moment(data.date).format("YYYY/MM/DD")
+            totalAmount += data.amount
+            console.log(totalAmount)
           })
-          res.render("index", { recordData: recordData, sortCategory })
+          res.render("index", { recordData: recordData, sortCategory, totalAmount })
         }
 
 
@@ -50,8 +53,10 @@ router.get('/', (req, res) => {
             const recordsNameFilter = recordData.filter(data => data.name.toLowerCase().includes(keyword))
             recordsNameFilter.forEach(data => {
               data.date = moment(data.date).format("YYYY/MM/DD")
+              totalAmount += data.amount
+              console.log(totalAmount)
             })
-            res.render("index", { recordData: recordsNameFilter, sortCategory, sortKeywords })
+            res.render("index", { recordData: recordsNameFilter, sortCategory, sortKeywords, totalAmount })
 
 
 
