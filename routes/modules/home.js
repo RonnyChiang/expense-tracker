@@ -22,14 +22,12 @@ router.get('/', (req, res) => {
           recordsNameFilter.forEach(data => {
             data.date = moment(data.date).format("YYYY/MM/DD")
             totalAmount += data.amount
-            console.log(totalAmount)
           })
           res.render("index", { recordData: recordsNameFilter, sortCategory, totalAmount })
         } else {
           recordData.forEach(data => {
             data.date = moment(data.date).format("YYYY/MM/DD")
             totalAmount += data.amount
-            console.log(totalAmount)
           })
           res.render("index", { recordData: recordData, sortCategory, totalAmount })
         }
@@ -54,7 +52,6 @@ router.get('/', (req, res) => {
             recordsNameFilter.forEach(data => {
               data.date = moment(data.date).format("YYYY/MM/DD")
               totalAmount += data.amount
-              console.log(totalAmount)
             })
             res.render("index", { recordData: recordsNameFilter, sortCategory, sortKeywords, totalAmount })
 
