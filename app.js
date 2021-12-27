@@ -5,7 +5,9 @@ const methodOverride = require('method-override')
 const session = require("express-session")
 const flash = require('connect-flash')
 
-require('dotenv').config()
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
 const routes = require('./routes')  // 引用路由器
 const usePassport = require('./config/passport')

@@ -23,6 +23,7 @@
     "moment": "^2.29.1",
     "mongoose": "^6.1.2",
     "passport": "^0.5.2",
+    "passport-facebook": "^3.0.0",
     "passport-local": "^1.0.0"
   }
 }
