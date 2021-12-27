@@ -12,7 +12,6 @@ const db = require("../../config/mongoose");
 
 db.once("open", () => {
   const userIds = Array.from({ length: 1 }, (v, i) => i);
-  let categoryItems = {};
 
   return Category.find({})
     .then(categories => {
