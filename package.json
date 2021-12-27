@@ -7,7 +7,8 @@
     "start": "node app.js",
     "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "node models/seeds/categorySeeder.js"
+    "seedCategory": "node models/seeds/categorySeeder.js",
+    "seedUser": "node models/seeds/recordSeeder.js"
   },
   "keywords": [],
   "author": "",
