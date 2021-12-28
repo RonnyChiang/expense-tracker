@@ -36,19 +36,18 @@ db.once("open", () => {
                 categories.map(cId => {
                   const cateId = cId._id
                   console.log(cateId)
-                  return Promise.all(
-                    recordIds.map(rId => {
-                      console.log(rId)
-                      return Record.create({
-                        name: `Item${rId + 1}`,
-                        date: `1991-06-01`,
-                        amount: `${1000 + rId + 1}`,
-                        description: `item${rId + 1}`,
-                        userId: userId,
-                        categoryId: cateId
-                      });
-                    })
-                  )
+                  recordIds.map(rId => {
+                    console.log(rId)
+                    return Record.create({
+                      name: `Item${rId + 1}`,
+                      date: `1991-06-01`,
+                      amount: `${1000 + rId + 1}`,
+                      description: `item${rId + 1}`,
+                      userId: userId,
+                      categoryId: cateId
+                    });
+                  })
+
                 })
               );
             })
