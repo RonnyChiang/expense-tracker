@@ -12,9 +12,9 @@ router.get('/facebook/callback', passport.authenticate('facebook', {
 }))
 
 router.get('/login/google',
-  passport.authenticate('google', { scope: ['profile'] }));
+  passport.authenticate('google', { scope: ['profile', "email"] }));
 
-router.get('/oauth2/redirect/accounts.google.com',
+router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/users/login', failureMessage: true }),
   function (req, res) {
     res.redirect('/');

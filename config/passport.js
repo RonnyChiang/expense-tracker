@@ -70,10 +70,25 @@ module.exports = app => {
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: process.env.GOOGLE_CALLBACK
   },
-    function (accessToken, refreshToken, profile, cb) {
-      User.findOrCreate({ googleId: profile.id }, function (err, user) {
-        return cb(err, user);
-      });
+    function (accessToken, refreshToken, profile, done) {
+      const { name, email } = profile._json
+      User.findOne({ email })
+        .then(user => {
+          if (user) return done(null, user)
+
+          const randomPassword = Math.random().toString(36).slice(-8)
+
+          bcrypt
+            .genSalt(10) // 產生「鹽」，並設定複雜度係數為 10
+            .then(salt => bcrypt.hash(randomPassword, salt)) // 為使用者密碼「加鹽」，產生雜湊值
+            .then(hash => User.create({
+              name,
+              email,
+              password: hash // 用雜湊值取代原本的使用者密碼
+            }))
+            .then(user => done(null, user))
+            .catch(err => done(err, false))
+        })
     }
   ));
 
