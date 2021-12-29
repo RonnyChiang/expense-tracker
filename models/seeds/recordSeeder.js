@@ -12,7 +12,7 @@ const db = require('../../config/mongoose')
 
 
 db.once("open", () => {
-  const userIds = Array.from({ length: 1 }, (v, i) => i);
+  const userIds = Array.from({ length: 2 }, (v, i) => i);
 
   return Category.find({})
     .then(categories => {
@@ -34,19 +34,22 @@ db.once("open", () => {
 
               return Promise.all(
                 categories.map(cId => {
-                  const cateId = cId._id
-                  console.log(cateId)
-                  recordIds.map(rId => {
-                    console.log(rId)
-                    return Record.create({
-                      name: `Item${rId + 1}`,
-                      date: `1991-06-01`,
-                      amount: `${1000 + rId + 1}`,
-                      description: `item${rId + 1}`,
-                      userId: userId,
-                      categoryId: cateId
-                    });
-                  })
+                  const categoryId = cId._id
+                  const categoryName = cId.name
+                  console.log(categoryId)
+                  return Promise.all(
+                    recordIds.map(rId => {
+                      console.log(rId)
+                      return Record.create({
+                        name: `${categoryName}${rId + 1}`,
+                        date: `${1991 - 06 - 01 + rId}`,
+                        amount: `${1000 + rId + 1}`,
+                        description: `item${rId + 1}`,
+                        userId: userId,
+                        categoryId: categoryId
+                      });
+                    })
+                  )
 
                 })
               );
