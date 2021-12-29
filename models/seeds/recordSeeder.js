@@ -36,10 +36,9 @@ db.once("open", () => {
                 categories.map(cId => {
                   const categoryId = cId._id
                   const categoryName = cId.name
-                  console.log(categoryId)
                   return Promise.all(
                     recordIds.map(rId => {
-                      console.log(rId)
+
                       return Record.create({
                         name: `${categoryName}${rId + 1}`,
                         date: `${1991 - 06 - 01 + rId}`,

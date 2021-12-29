@@ -67,8 +67,9 @@ npm install nodemon -g              // -g 安裝在全域
 ```
 
 ```
-npm run seed             // 安裝預設使用者及種子資料（如有需要）
+npm run seed             // 安裝預設使用者及種子資料（必要！）
 ```
+由於目前尚無新增類別之功能，故需要先載入種子資料已取得既有類別．
 預設使用者帳號為 user1@example.com及user2@example.com，密碼皆為12345678
 
 
