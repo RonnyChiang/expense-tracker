@@ -11,5 +11,13 @@ router.get('/facebook/callback', passport.authenticate('facebook', {
   failureRedirect: '/users/login'
 }))
 
+router.get('/login/google',
+  passport.authenticate('google', { scope: ['profile'] }));
+
+router.get('/oauth2/redirect/accounts.google.com',
+  passport.authenticate('google', { failureRedirect: '/users/login', failureMessage: true }),
+  function (req, res) {
+    res.redirect('/');
+  });
 
 module.exports = router
