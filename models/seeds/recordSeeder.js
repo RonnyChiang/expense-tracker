@@ -36,7 +36,7 @@ db.once("open", () => {
                 categories.map(cId => {
                   const cateId = cId._id
                   console.log(cateId)
-                  Promise.all(
+                  return Promise.all(
                     recordIds.map(rId => {
                       console.log(rId)
                       return Record.create({
@@ -49,6 +49,7 @@ db.once("open", () => {
                       });
                     })
                   )
+
                 })
               );
             })
