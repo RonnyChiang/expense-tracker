@@ -1,0 +1,19 @@
+{{#if categoryData}}
+<div class="row row-cols-md-6 g-3">
+  {{#each categoryData}}
+  <div class="col text-center">
+    <div class="card h-100 align-items-center">
+      <div class="col-1 text-center">
+        <i class="{{this.icon}} index-icon"></i>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{this.name}}</h5>
+        <p class="card-text"></p>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+
+</div>
+{{else}}
+{{/if}}

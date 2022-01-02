@@ -2,12 +2,12 @@
   "results": [
     {
       "id": 1,
-      "name": "家居物業",
+      "name": "家居用品",
       "icon": "fas fa-home"
     },
     {
       "id": 2,
-      "name": "交通出行",
+      "name": "交通",
       "icon": "fas fa-shuttle-van"
     },
     {
