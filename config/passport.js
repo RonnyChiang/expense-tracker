@@ -26,12 +26,12 @@ module.exports = app => {
             return done(null, user)
           })
       })
-    // .catch(err => {
-    //   res.render(
-    //     'errorPage',
-    //     { status: 500, error: err.message }
-    //   )
-    // })
+      .catch(err => {
+        res.render(
+          'errorPage',
+          { status: 500, error: err.message }
+        )
+      })
   }))
 
   // facebook auth

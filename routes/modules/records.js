@@ -28,12 +28,12 @@ router.post('/', (req, res) => {
     .then(() => {
       res.redirect("/")
     })
-  // .catch(err => {
-  //   res.render(
-  //     'errorPage',
-  //     { status: 500, error: err.message }
-  //   )
-  // })
+    .catch(err => {
+      res.render(
+        'errorPage',
+        { status: 500, error: err.message }
+      )
+    })
 })
 
 
@@ -48,12 +48,12 @@ router.get("/:recordId/edit", (req, res) => {
     .then(record => {
       record.date = moment(record.date).format("YYYY-MM-DD")
       res.render("edit", { record })
-      // .catch(err => {
-      //   res.render(
-      //     'errorPage',
-      //     { status: 500, error: err.message }
-      //   )
-      // })
+    })
+    .catch(err => {
+      res.render(
+        'errorPage',
+        { status: 500, error: err.message }
+      )
     })
 })
 
@@ -77,12 +77,12 @@ router.put("/:recordId", (req, res) => {
         })
     })
     .then(() => res.redirect(`/`))
-  // .catch(err => {
-  //   res.render(
-  //     'errorPage',
-  //     { status: 500, error: err.message }
-  //   )
-  // })
+    .catch(err => {
+      res.render(
+        'errorPage',
+        { status: 500, error: err.message }
+      )
+    })
 })
 
 
@@ -93,12 +93,12 @@ router.delete("/:recordId", (req, res) => {
   return Record.findOne({ _id, userId })
     .then(record => record.remove())
     .then(() => res.redirect("/"))
-  // .catch(err => {
-  //   res.render(
-  //     'errorPage',
-  //     { status: 500, error: err.message }
-  //   )
-  // })
+    .catch(err => {
+      res.render(
+        'errorPage',
+        { status: 500, error: err.message }
+      )
+    })
 })
 
 //export

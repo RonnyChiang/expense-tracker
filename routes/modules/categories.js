@@ -10,7 +10,6 @@ router.get("/", (req, res) => {
     .lean()
     .sort({ _id: "asc" })
     .then(categoryData => {
-      console.log(categoryData)
       res.render("categories", { categoryData })
     })
 

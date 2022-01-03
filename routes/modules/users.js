@@ -62,12 +62,12 @@ router.post("/register", (req, res) => {
 
       }
     })
-  // .catch(err => {
-  //   res.render(
-  //     'errorPage',
-  //     { status: 500, error: err.message }
-  //   )
-  // })
+    .catch(err => {
+      res.render(
+        'errorPage',
+        { status: 500, error: err.message }
+      )
+    })
 
 })
 

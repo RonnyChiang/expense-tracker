@@ -2,7 +2,7 @@
 const categories = require("../category")
 
 // get from json
-const categoryList = require("../../category.json").results
+const categoryList = require("./category.json").results
 // mongoose
 const db = require("../../config/mongoose")
 

@@ -32,12 +32,10 @@ router.get('/', (req, res) => {
           })
           res.render("index", { recordData: recordData, sortCategory, totalAmount })
         }
-
-
-        // .catch(err => {
-        //   console.log(err)
-        //   res.render('error', { status: 500, error: err.message })
-        // })
+      })
+      .catch(err => {
+        console.log(err)
+        res.render('errorPage', { status: 500, error: err.message })
       })
   } else {
     return Category
@@ -55,13 +53,10 @@ router.get('/', (req, res) => {
               totalAmount += data.amount
             })
             res.render("index", { recordData: recordsNameFilter, sortCategory, sortKeywords, totalAmount })
-
-
-
-            // .catch(err => {
-            //   console.log(err)
-            //   res.render('error', { status: 500, error: err.message })
-            // })
+          })
+          .catch(err => {
+            console.log(err)
+            res.render('errorPage', { status: 500, error: err.message })
           })
       })
   }
