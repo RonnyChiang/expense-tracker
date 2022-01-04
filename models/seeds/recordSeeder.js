@@ -38,7 +38,6 @@ db.once("open", () => {
                   const categoryName = cId.name
                   return Promise.all(
                     recordIds.map(rId => {
-
                       return Record.create({
                         name: `${categoryName}${rId + 1}`,
                         date: `${1991 - 06 - 01 + rId}`,
@@ -49,7 +48,6 @@ db.once("open", () => {
                       });
                     })
                   )
-
                 })
               );
             })

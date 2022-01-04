@@ -26,24 +26,6 @@ Hana 可以：
 5. 可透過facebook及google註冊登入
 
 
-### 安裝資料庫
-
-請先確認安裝有安裝mongoDB(4.2.17)
-
-1.至官網下載4.2.17版本https://www.mongodb.com/download-center/community
-
-2.將資料夾移動至/Users/[你的使用者名稱]/改名為"mongodb"，並於同階層新增"mongodb-data"資料夾
-
-3.執行mongoDB
-```
-cd ~/mongodb/bin/       // 切換到 mongodb 目錄
-```
-```
-./mongod --dbpath /Users/[你的使用者名稱]/mongodb-data
-```
-若能於系統訊息中查詢到"waiting for connections on port 27017"，即表示資料庫成功連接。
-
-
 ### 安裝
 
 1.開啟終端機(Terminal)cd 到存放專案本機位置並執行:
@@ -106,6 +88,7 @@ ctrl + c
 
 
 - MacbookAir M1 - 開發環境
+- mongoDB(4.2.17)
 - [Visual Studio Code](https://visualstudio.microsoft.com/zh-hant/) - 開發環境
 - [node.js 16.13.1](https://nodejs.org/en/) - 開發環境
 
