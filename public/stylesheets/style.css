@@ -1,22 +1,35 @@
 /* .index-icon */
+.info-bar {
+  margin: 0 auto;
+}
 
 .search-bar {
   margin: 0 auto;
-  width: 680px;
+  width: 500px;
   background-color: #fce2cf;
   border-radius: 8px;
   padding: 20px 30px;
   border: 0;
-  margin-top: 60px;
+  margin-top: 10px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
+.function-bar {
+  margin: 0 auto;
+  width: 500px;
+  background-color: #fce2cf;
+  border-radius: 8px;
+  padding: 20px 30px;
+  border: 0;
+  margin-top: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
 /* .form-search {
   width: 100%;
 } */
 
 .input-group {
-  max-width: 330px;
+  max-width: 400px;
 }
 
 

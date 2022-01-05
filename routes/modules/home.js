@@ -9,6 +9,7 @@ const Category = require('../../models/category')
 router.get('/', (req, res) => {
   const userId = req.user._id
   const { sortCategory, sortKeywords } = req.query
+  console.log(req.query)
   const keywords = sortKeywords
   const keyword = keywords
   let totalAmount = 0
@@ -24,13 +25,13 @@ router.get('/', (req, res) => {
             data.date = moment(data.date).format("YYYY/MM/DD")
             totalAmount += data.amount
           })
-          res.render("index", { recordData: recordsNameFilter, sortCategory, totalAmount })
+          res.render("index", { recordData: recordsNameFilter, sortCategory, totalAmount, sortKeywords })
         } else {
           recordData.forEach(data => {
             data.date = moment(data.date).format("YYYY/MM/DD")
             totalAmount += data.amount
           })
-          res.render("index", { recordData: recordData, sortCategory, totalAmount })
+          res.render("index", { recordData: recordData, sortCategory, totalAmount, sortKeywords })
         }
       })
       .catch(err => {
