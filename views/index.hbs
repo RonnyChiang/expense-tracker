@@ -24,7 +24,7 @@
             <button class="btn btn-major" type="submit" id="search-button">
               <i class="fas fa-search"></i>
             </button>
-            <button type="submit" class="btn btn-outline-danger ms-2" onclick="ClearText()">清除篩選</button>
+            <button type="submit" class="btn btn-outline-danger ms-2" onclick="ClearText()">清除關鍵字</button>
           </div>
         </div>
       </form>
@@ -90,6 +90,11 @@
   </div>
 </div>
 
+
+{{else}}
+
+{{/if}}
+
 <script>
 
   function ClearFields() {
@@ -99,10 +104,5 @@
 
   function ClearText() {
     document.getElementById("sortKeywords").value = "";
-    document.getElementById("search-button").onclick();
   }
 </script>
-
-{{else}}
-
-{{/if}}
