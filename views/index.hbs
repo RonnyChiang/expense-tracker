@@ -6,14 +6,9 @@
       <form action="/" class="">
         <div class="input-group">
           <select name="sortCategory" id="sortCategory" class="form-select" onchange="submit()">
-            <option selected id="selected-value" value="{{#if sortCategory}}{{sortCategory}}{{else}}{{/if}}">{{#if
-              sortCategory}}{{sortCategory}}{{else}}請選擇類別 {{/if}}</option>
-            <option value="家居用品">家居用品
-            </option>
-            <option value="交通">交通</option>
-            <option value="休閒娛樂">休閒娛樂</option>
-            <option value="餐飲食品">餐飲食品</option>
-            <option value="其他">其他</option>
+            {{#each categoryItem}}
+            <option value="{{this.name}}" {{this.selected}}>{{this.name}}</option>
+            {{/each}}
           </select>
           <button type="button" class="btn btn-outline-danger ms-2" onclick="ClearFields()">清除篩選</button>
         </div>
