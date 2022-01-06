@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
   const keyword = sortKeywords
   let totalAmount = 0
   let sortCategoryData = undefined
+  let categoryItemData = []
   const categoryItem = new Promise((resolve, reject) => {
     resolve(
       Category.find().select('name').sort({ _id: 'asc' }).lean()
@@ -20,19 +21,12 @@ router.get('/', (req, res) => {
 
   categoryItem
     .then(categories => {
-      console.log(categories)
       categories.forEach(item => {
         if (item.name === sortCategory) item.selected = 'selected'
+        categoryItemData.push(item)
       })
-      console.log(categories)
-      console.log(categoryItem)
-      return categoryItem
     })
 
-
-
-
-  console.log(categoryItem)
 
   Category.find({ name: sortCategory }) //抓出資料庫所有類別
     .then(category => {
@@ -49,7 +43,7 @@ router.get('/', (req, res) => {
             data.date = moment(data.date).format("YYYY/MM/DD") //輸出日期
             totalAmount += data.amount  //累計金額
           })
-          res.render("index", { recordData: recordsNameFilter, sortCategory, totalAmount, sortKeywords, categoryItem })
+          res.render("index", { recordData: recordsNameFilter, sortCategory, totalAmount, sortKeywords, categoryItemData })
         })
         .catch(err => {
           console.log(err)
