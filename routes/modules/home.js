@@ -6,32 +6,38 @@ const moment = require('moment')
 const Record = require("../../models/record")
 const Category = require('../../models/category')
 // route
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   const userId = req.user._id
   const { sortCategory, sortKeywords } = req.query
   const keyword = sortKeywords
   let totalAmount = 0
   let sortCategoryId = ""
+  const categoryItem = await Category.find().select('name').sort({ _id: 'asc' }).lean()
+  console.log(categoryItem)
+  categoryItem.forEach(item => {
+    if (item.name === sortCategory) item.selected = 'selected'
+  })
 
   Category.find({}) //抓出資料庫所有類別
     .then(categories => {
+      console.log(categories)
       if (sortCategory) { // 有篩選存在找出id
-        sortCategoryId = categories.filter(data => data.name === sortCategory)[0]._id
+        sortCategoryId = categories.find(data => data.name === sortCategory)._id
       }
+      console.log(sortCategoryId)
       const recordFind = sortCategoryId ? { $and: [{ userId }, { categoryId: sortCategoryId }] } : { userId } // 判斷是否有類別篩選id 
       Record.find(recordFind)
         .lean()
         .populate("categoryId")
         .sort({ _id: "asc" })
         .then(recordData => {
-          const keywordFind = keyword ? keyword : ""
-          console.log(keywordFind)
+          const keywordFind = keyword ? keyword : "" // 判斷是否有keyword
           const recordsNameFilter = recordData.filter(data => data.name.toLowerCase().includes(keywordFind))
           recordsNameFilter.forEach(data => {
-            data.date = moment(data.date).format("YYYY/MM/DD")
-            totalAmount += data.amount
+            data.date = moment(data.date).format("YYYY/MM/DD") //輸出日期
+            totalAmount += data.amount  //累計金額
           })
-          res.render("index", { recordData: recordsNameFilter, sortCategory, totalAmount, sortKeywords })
+          res.render("index", { recordData: recordsNameFilter, sortCategory, totalAmount, sortKeywords, categoryItem })
         })
         .catch(err => {
           console.log(err)
