@@ -6,6 +6,7 @@
       <form action="/" class="">
         <div class="input-group">
           <select name="sortCategory" id="sortCategory" class="form-select" onchange="submit()">
+            <option value="">請選擇類別</option>
             {{#each categoryItem}}
             <option value="{{this.name}}" {{this.selected}}>{{this.name}}</option>
             {{/each}}
