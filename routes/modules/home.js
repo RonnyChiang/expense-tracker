@@ -13,25 +13,26 @@ router.get('/', (req, res) => {
   let totalAmount = 0
   let sortCategoryData = undefined
   let categoryItemData = []
+  // 從資料庫取得類別放入頁面
   const categoryItem = new Promise((resolve, reject) => {
     resolve(
-      Category.find().select('name').sort({ _id: 'asc' }).lean()
+      Category.find().sort({ _id: 'asc' }).lean()
     )
   })
-
   categoryItem
     .then(categories => {
       categories.forEach(item => {
+        // 判斷目前所選類別 顯示於頁面
         if (item.name === sortCategory) item.selected = 'selected'
         categoryItemData.push(item)
       })
     })
 
-
-  Category.find({ name: sortCategory }) //抓出資料庫所有類別
+  // 從資料庫取得資料 
+  Category.find({ name: sortCategory }) //找到被篩選的類別
     .then(category => {
       sortCategoryData = category.find(data => data)
-      const recordFind = sortCategoryData ? { $and: [{ userId }, { categoryId: sortCategoryData._id }] } : { userId } // 判斷是否有類別篩選id 
+      const recordFind = sortCategoryData ? { $and: [{ userId }, { categoryId: sortCategoryData._id }] } : { userId } // 判斷是否有篩選類別
       Record.find(recordFind)
         .lean()
         .populate("categoryId")

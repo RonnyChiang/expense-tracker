@@ -90,6 +90,7 @@ router.put("/:recordId", (req, res) => {
 router.delete("/:recordId", (req, res) => {
   const userId = req.user._id
   const _id = req.params.recordId
+
   return Record.findOne({ _id, userId })
     .then(record => record.remove())
     .then(() => res.redirect("/"))
@@ -103,3 +104,4 @@ router.delete("/:recordId", (req, res) => {
 
 //export
 module.exports = router
+
