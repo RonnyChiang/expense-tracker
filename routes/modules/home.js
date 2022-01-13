@@ -25,28 +25,27 @@ router.get('/', (req, res) => {
       return categoryItemData
     })
     .then(categoryItemData => {
-      // 從資料庫取得資料 
-      Category.find({ name: sortCategory }) //找到被篩選的類別
-        .then(category => {
-          sortCategoryData = category.find(data => data)
-          const recordFind = sortCategoryData ? { $and: [{ userId }, { categoryId: sortCategoryData._id }] } : { userId } // 判斷是否有篩選類別
-          Record.find(recordFind)
-            .lean()
-            .populate("categoryId")
-            .sort({ _id: "asc" })
-            .then(recordData => {
-              const keywordFind = keyword ? keyword : "" // 判斷是否有keyword
-              const recordsNameFilter = recordData.filter(data => data.name.toLowerCase().includes(keywordFind))
-              recordsNameFilter.forEach(data => {
-                data.date = moment(data.date).format("YYYY/MM/DD") //輸出日期
-                totalAmount += data.amount  //累計金額
-              })
-              res.render("index", { recordData: recordsNameFilter, sortCategory, totalAmount, keyword, categoryItemData })
-            })
-            .catch(err => {
-              console.log(err)
-              res.render('errorPage', { status: 500, error: err.message })
-            })
+      // 從類別中找到目前篩選類別
+      let sortCategoryData = categoryItemData.find(data => data.name === sortCategory)
+      // 判斷是否有篩選類別
+      const recordFind = sortCategoryData ? { $and: [{ userId }, { categoryId: sortCategoryData._id }] } : { userId }
+      // 從資料庫取得紀錄
+      Record.find(recordFind)
+        .lean()
+        .populate("categoryId")
+        .sort({ _id: "asc" })
+        .then(recordData => {
+          const keywordFind = keyword ? keyword : "" // 判斷是否有keyword
+          const recordsNameFilter = recordData.filter(data => data.name.toLowerCase().includes(keywordFind))
+          recordsNameFilter.forEach(data => {
+            data.date = moment(data.date).format("YYYY/MM/DD") //輸出日期
+            totalAmount += data.amount  //累計金額
+          })
+          res.render("index", { recordData: recordsNameFilter, sortCategory, totalAmount, keyword, categoryItemData })
+        })
+        .catch(err => {
+          console.log(err)
+          res.render('errorPage', { status: 500, error: err.message })
         })
     })
 
