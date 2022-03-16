@@ -31,7 +31,7 @@ module.exports = {
         Record.find(recordFind)
           .lean()
           .populate("categoryId")
-          .sort({ _id: "asc" })
+          .sort({ _id: "desc" })
           .then(recordData => {
             const keywordFind = keyword ? keyword : "" // 判斷是否有keyword
             const recordsNameFilter = recordData.filter(data => data.name.toLowerCase().includes(keywordFind))
@@ -55,11 +55,14 @@ module.exports = {
 
   postRecord: (req, res, next) => {
     const userId = req.user._id
+    console.log(userId)
     const { category, amount, name, date, description } = req.body
+    console.log(category)
     return Category
       .findOne({ name: category })
       .then(category => category._id)
       .then(categoryId => {
+        console.log(categoryId)
         return Record
           .create({ name, date, amount, description, categoryId: categoryId, userId })
       })

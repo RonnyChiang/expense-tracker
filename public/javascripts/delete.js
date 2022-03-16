@@ -6,36 +6,34 @@ const deleteButtons = document.querySelectorAll('.delete-button')
 deleteButtons.forEach(deleteButton => {
   console.log("go")
   // attach event listeners for each of them 
-  deleteButton.addEventListener('click', function onDeleteButtonClicked(event) {
-    console.log("go")
-    const id = deleteButton.dataset.id
-
-    // trigger SweetAlert package for dialogue
-    Swal.fire({
-      // SweetAlert dialogue configuration
-      title: '確定要刪除嗎?',
-      text: "一但執行，刪除的檔案是無法恢復的唷!",
-      icon: 'warning',
+  deleteButton.addEventListener('click', async event => {
+    event.stopPropagation()
+    event.preventDefault()
+    let result = null
+    result = await Swal.fire({
+      title: '你要確定餒',
+      text: '確定要刪除？',
+      icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: '確定!',
-      cancelButtonText: '取消!'
-    }).then(result => {
-      // if confirmed, then return something
-      if (result.isConfirmed) {
-        return Swal.fire(
-          '紀錄已經刪除!',
-          '掰掰了',
-          'success'
-        )
-      }
-    }).then(result => {
-      // if catch returned object, then delete
-      if (result) {
-        axios.delete(`/records/${id}`)
-          .catch(err => console.log(err))
-      }
+      confirmButtonText: 'Yes, delete it!'
     })
+    if (result.isConfirmed) {
+      await Swal.fire(
+        'Deleted!',
+        '成功刪除囉！',
+        'success'
+      )
+      deleteButton.parentElement.submit()
+    } else if (
+      result.dismiss === Swal.DismissReason.cancel
+    ) {
+      Swal.fire(
+        'Cancelled',
+        '還是留著吧',
+        'error'
+      )
+    }
   })
 })

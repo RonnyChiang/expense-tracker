@@ -71,9 +71,9 @@
               <a href="/records/{{this._id}}/edit">
                 <button type="button" class="btn btn-info me-2">修改</button>
               </a>
-              <form action="/records/{{this._id}}?_method=DELETE" method="POST"
-                onsubmit="return confirm('是否確定刪除 {{this.name}} ?');">
-                <button class="btn btn-danger delete-button" data-id="{{ this._id}}">刪除</button>
+              <form action="/records/{{this._id}}?_method=DELETE" method="POST">
+                {{!-- onsubmit="return confirm('是否確定刪除 {{this.name}} ?');"> --}}
+                <button type="submit" class="btn btn-danger delete-button" data-id="{{ this._id}}">刪除</button>
               </form>
             </div>
           </div>
@@ -104,4 +104,3 @@
   }
 
 </script>
-<script src="../public/javascripts/delete.js"></script>
